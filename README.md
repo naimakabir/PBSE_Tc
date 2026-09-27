@@ -13,7 +13,7 @@ Naima Kabir and Mohammad Rafiqul Islam, *A Physics-Based Stacking Ensemble for P
 | Evaluation | R² | RMSE (K) | MAE (K) |
 |---|---|---|---|
 | UCI held-out test set (21,263 compounds) | 0.938 | 8.48 | 4.70 |
-| External validation, Stanev dataset (250 disjoint compounds) | 0.810 | 14.87 | 7.79 |
+| External validation, Stanev dataset (250 disjoint compounds) | 0.810 | 14.87 | 7.77 |
 
 External validation compounds were confirmed non-overlapping with the UCI training set. Coherence length and upper critical field for the external set were derived from a Tc-proxy model trained only on UCI data, never from measured critical temperature, to avoid leaking the prediction target into the input features.
 
@@ -33,15 +33,15 @@ External validation on the Stanev dataset follows the same feature pipeline, wit
 
 ```
 ├── data/
-│   ├── Final_dataset_83.csv              # UCI dataset with all engineered features
-│   ├── Fermi_169_unique_v2.csv           # Fermi velocity reference dataset (169 materials)
-│   ├── UCI_family_subFamily.csv          # UCI dataset with family/subfamily labels
+│   ├── train_raw.csv                     # UCI dataset (81 compositional features for 21,263 compounds)
+│   ├── unique_m.csv                      # UCI dataset (compositions of 21,263 compound)
+│   ├── Fermi_169_unique_v5.csv           # Fermi velocity reference dataset (162 materials)
 │   └── stanev_250_external.csv           # External validation set (Stanev, disjoint from UCI)
 ├── notebooks/
-│   ├── fermi_velocity_prediction.ipynb   # Stage 1: vF classification and regression pipeline
-│   ├── vF_xi_Hc2_derivation.ipynb        # Stages 2-3: OOF Tc estimation, GL feature derivation
-│   ├── shap_feature_selection.ipynb      # Stage 4: SHAP ranking and top-30 selection
-│   ├── stacking_ensemble.ipynb           # Stage 5: base learner tuning and stacking ensemble
+│   ├── fermi_velocity_162.ipynb          # Stage 1: pick features from UCI dataset for training vF dataset.
+│   ├── vF_xi_Hc2_derivation.ipynb        # Stages 2-4: vF classification and regression pipeline, OOF Tc estimation, GL feature derivation
+│   ├── shap_feature_selection.ipynb      # Stage 5: SHAP ranking and top-30 selection
+│   ├── stacking_ensemble.ipynb           # Stage 6: base learner tuning and stacking ensemble
 │   └── external_validation.ipynb         # Stanev external validation, leakage-free Tc-proxy
 ├── models/
 │   ├── vF_hybrid_model.pkl               # Trained Fermi velocity fallback model
@@ -77,11 +77,14 @@ pip install -r requirements.txt
 Run the notebooks in order:
 
 ```bash
-jupyter notebook notebooks/fermi_velocity_prediction.ipynb
+jupyter notebook notebooks/fermi_velocity_162.ipynb
 jupyter notebook notebooks/vF_xi_Hc2_derivation.ipynb
-jupyter notebook notebooks/shap_feature_selection.ipynb
+jupyter notebook notebooks/SHAP_feature_selection.ipynb
 jupyter notebook notebooks/stacking_ensemble.ipynb
 jupyter notebook notebooks/external_validation.ipynb
+jupyter notebook notebooks/per_family_braekdown.ipynb
+jupyter notebook notebooks/Ic_stratified_analysis.ipynb
+jupyter notebook notebooks/paired_ttest_83.ipynb
 ```
 
 Each notebook reads its inputs from `data/` and writes intermediate outputs back to the same directory. Trained model artifacts are saved to `models/`.
