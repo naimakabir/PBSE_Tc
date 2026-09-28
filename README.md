@@ -97,6 +97,8 @@ Each notebook reads its inputs from `data/` and writes intermediate outputs back
 - **UCI Superconductivity Dataset**: Hamidieh, K. (2018). *A data-driven statistical model for predicting the critical temperature of a superconductor*. Computational Materials Science, 154, 346-354. Originally compiled from the SuperCon database maintained by the Japanese National Institute for Materials Science (NIMS).
 - **External validation set**: Stanev, V. et al. (2018). *Machine learning modeling of superconducting critical temperature*. npj Computational Materials, 4, 29.
 
+
+Note: These datasets remain under their original licenses.
 ## Methodological notes on leakage avoidance
 
 Because coherence length and upper critical field are deterministic functions of T<sub>c</sub> and Fermi velocity, computing them from the measured T<sub>c</sub> would leak the prediction target directly into the model's input features. This pipeline avoids that at every stage:
