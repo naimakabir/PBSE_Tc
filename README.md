@@ -36,7 +36,7 @@ External validation on the Stanev dataset follows the same feature pipeline, wit
 │   ├── train_raw.csv                     # UCI dataset (81 compositional features for 21,263 compounds)
 │   ├── unique_m.csv                      # UCI dataset (compositions of 21,263 compound)
 │   ├── Fermi_169_unique_v5.csv           # Fermi velocity reference dataset (162 materials)
-│   └── stanev_250_compounds.csv           # External validation set (Stanev, disjoint from UCI)
+│   └── stanev_250_compounds.csv          # External validation set (Stanev, disjoint from UCI)
 ├── notebooks/
 │   ├── fermi_velocity_162.ipynb          # Stage 1: pick features from UCI dataset for training vF dataset.
 │   ├── vF_xi_Hc2_derivation.ipynb        # Stages 2-4: vF classification and regression pipeline, OOF Tc estimation, GL feature derivation
@@ -44,7 +44,7 @@ External validation on the Stanev dataset follows the same feature pipeline, wit
 │   ├── stacking_ensemble.ipynb           # Stage 6: base learner tuning and stacking ensemble
 │   ├── External_validation.ipynb         # Stanev external validation, leakage-free Tc-proxy
 │   ├── per_family_breakdown.ipynb        # Per-family test-set performance (Table 6)
-│   ├── paired_significance_test.ipynb     # Paired t-test and Wilcoxon tests, stacking vs. base learners (Table 5)
+│   ├── paired_significance_test.ipynb    # Paired t-test and Wilcoxon tests, stacking vs. base learners (Table 5)
 │   └── Tc_stratified_analysis.ipynb      # Error, bias, and within-tolerance rates by Tc range (Table 7)
 ├── models/
 │   ├── vF_hybrid_model.pkl               # Trained Fermi velocity fallback model (can get upon running the vF_xi_Hc2_derivation.ipynb file)
