@@ -36,15 +36,15 @@ External validation on the Stanev dataset follows the same feature pipeline, wit
 │   ├── train_raw.csv                     # UCI dataset (81 compositional features for 21,263 compounds)
 │   ├── unique_m.csv                      # UCI dataset (compositions of 21,263 compound)
 │   ├── Fermi_169_unique_v5.csv           # Fermi velocity reference dataset (162 materials)
-│   └── stanev_250_external.csv           # External validation set (Stanev, disjoint from UCI)
+│   └── stanev_250_compounds.csv           # External validation set (Stanev, disjoint from UCI)
 ├── notebooks/
 │   ├── fermi_velocity_162.ipynb          # Stage 1: pick features from UCI dataset for training vF dataset.
 │   ├── vF_xi_Hc2_derivation.ipynb        # Stages 2-4: vF classification and regression pipeline, OOF Tc estimation, GL feature derivation
-│   ├── shap_feature_selection.ipynb      # Stage 5: SHAP ranking and top-30 selection
+│   ├── SHAP_Feature_selection.ipynb      # Stage 5: SHAP ranking and top-30 selection
 │   ├── stacking_ensemble.ipynb           # Stage 6: base learner tuning and stacking ensemble
-│   ├── external_validation.ipynb         # Stanev external validation, leakage-free Tc-proxy
+│   ├── External_validation.ipynb         # Stanev external validation, leakage-free Tc-proxy
 │   ├── per_family_breakdown.ipynb        # Per-family test-set performance (Table 6)
-│   ├── paired_significant_test.ipynb     # Paired t-test and Wilcoxon tests, stacking vs. base learners (Table 5)
+│   ├── paired_significance_test.ipynb     # Paired t-test and Wilcoxon tests, stacking vs. base learners (Table 5)
 │   └── Tc_stratified_analysis.ipynb      # Error, bias, and within-tolerance rates by Tc range (Table 7)
 ├── models/
 │   ├── vF_hybrid_model.pkl               # Trained Fermi velocity fallback model (can get upon running the vF_xi_Hc2_derivation.ipynb file)
@@ -82,10 +82,10 @@ Run the notebooks in order:
 ```bash
 jupyter notebook notebooks/fermi_velocity_162.ipynb
 jupyter notebook notebooks/vF_xi_Hc2_derivation.ipynb
-jupyter notebook notebooks/SHAP_feature_selection.ipynb
+jupyter notebook notebooks/SHAP_Feature_selection.ipynb
 jupyter notebook notebooks/stacking_ensemble.ipynb
-jupyter notebook notebooks/external_validation.ipynb
-jupyter notebook notebooks/paired_significant_test.ipynb
+jupyter notebook notebooks/External_validation.ipynb
+jupyter notebook notebooks/paired_significance_test.ipynb
 jupyter notebook notebooks/per_family_breakdown.ipynb
 jupyter notebook notebooks/Tc_stratified_analysis.ipynb
 ```
