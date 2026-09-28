@@ -35,7 +35,8 @@ External validation on the Stanev dataset follows the same feature pipeline, wit
 ├── data/
 │   ├── train_raw.csv                     # UCI dataset (81 compositional features for 21,263 compounds)
 │   ├── unique_m.csv                      # UCI dataset (compositions of 21,263 compound)
-│   ├── Fermi_169_unique_v5.csv           # Fermi velocity reference dataset (162 materials)
+│   ├── Fermi_169_unique_v5.csv           # Fermi velocity reference dataset (162 materials & critical temperature)
+│   ├── Fermi_169_unique_v6.csv           # Fermi velocity reference dataset (162 materials, vF value, family, subfamily, Tc)
 │   └── stanev_250_compounds.csv          # External validation set (Stanev, disjoint from UCI)
 ├── notebooks/
 │   ├── fermi_velocity_162.ipynb          # Stage 1: pick features from UCI dataset for training vF dataset.
