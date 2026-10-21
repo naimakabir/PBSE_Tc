@@ -15,7 +15,7 @@ Naima Kabir and Mohammad Rafiqul Islam, *A Physics-Based Stacking Ensemble for P
 | UCI held-out test set (21,263 compounds) | 0.937 | 8.48 | 4.73 |
 | External validation, Stanev dataset (250 disjoint compounds) | 0.809 | 14.89 | 7.77 |
 
-External validation compounds were confirmed non-overlapping with the UCI training set. Coherence length and upper critical field for the external set were derived from a Tc-proxy model trained only on UCI data, never from measured critical temperature, to avoid leaking the prediction target into the input features.
+External validation compounds were confirmed non-overlapping with the UCI training set. Coherence length and upper critical field for the external set were derived from a T<sub>c</sub>-proxy model trained only on UCI data, never from measured critical temperature, to avoid leaking the prediction target into the input features.
 
 ## Pipeline overview
 
@@ -27,7 +27,7 @@ The pipeline runs in five stages:
 4. **SHAP-based feature selection** — A preliminary XGBoost model ranks all 84 candidate features (81 compositional plus v<sub>F</sub>, ξ, H<sub>c2</sub>) by mean absolute SHAP value; the top 30 are retained for the final ensemble.
 5. **Stacking ensemble** — Five tuned base learners (KNN, SVR, MLP, Random Forest, LightGBM) are combined through a Ridge meta-learner using scikit-learn's `StackingRegressor`.
 
-External validation on the Stanev dataset follows the same feature pipeline, with v<sub>F</sub>, ξ, and H<sub>c2</sub> derived independently using a Tc-proxy model trained exclusively on UCI data.
+External validation on the Stanev dataset follows the same feature pipeline, with v<sub>F</sub>, ξ, and H<sub>c2</sub> derived independently using a T<sub>c</sub>-proxy model trained exclusively on UCI data.
 
 ## Repository structure
 
