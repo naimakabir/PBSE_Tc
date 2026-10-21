@@ -12,8 +12,8 @@ Naima Kabir and Mohammad Rafiqul Islam, *A Physics-Based Stacking Ensemble for P
 
 | Evaluation | R² | RMSE (K) | MAE (K) |
 |---|---|---|---|
-| UCI held-out test set (21,263 compounds) | 0.938 | 8.48 | 4.70 |
-| External validation, Stanev dataset (250 disjoint compounds) | 0.810 | 14.87 | 7.77 |
+| UCI held-out test set (21,263 compounds) | 0.937 | 8.48 | 4.73 |
+| External validation, Stanev dataset (250 disjoint compounds) | 0.809 | 14.89 | 7.77 |
 
 External validation compounds were confirmed non-overlapping with the UCI training set. Coherence length and upper critical field for the external set were derived from a Tc-proxy model trained only on UCI data, never from measured critical temperature, to avoid leaking the prediction target into the input features.
 
@@ -21,7 +21,7 @@ External validation compounds were confirmed non-overlapping with the UCI traini
 
 The pipeline runs in five stages:
 
-1. **Fermi velocity (v<sub>F</sub>) estimation** — A 162-material reference dataset spanning six superconducting families is used to build a hybrid classification-and-lookup system: chemically unambiguous compounds are assigned v<sub>F</sub> from literature-sourced canonical values by subfamily, and compounds falling into catch-all categories are estimated by a tuned XGBoost regressor.
+1. **Fermi velocity (v<sub>F</sub>) estimation** — A 230-material reference dataset spanning six superconducting families is used to build a hybrid classification-and-lookup system: chemically unambiguous compounds are assigned v<sub>F</sub> from literature-sourced canonical values by subfamily, and compounds falling into catch-all categories are estimated by a tuned XGBoost regressor.
 2. **Out-of-fold T<sub>c</sub> estimation** — To derive physics features without leaking the true target, an XGBoost model generates 10-fold out-of-fold T<sub>c</sub> predictions on the full UCI dataset. These, not the measured T<sub>c</sub>, are used downstream.
 3. **BCS-GL feature derivation** — Coherence length (ξ) and upper critical field (H<sub>c2</sub>) are computed from the predicted v<sub>F</sub> and the out-of-fold T<sub>c</sub> using standard BCS clean-limit and Ginzburg-Landau relations.
 4. **SHAP-based feature selection** — A preliminary XGBoost model ranks all 84 candidate features (81 compositional plus v<sub>F</sub>, ξ, H<sub>c2</sub>) by mean absolute SHAP value; the top 30 are retained for the final ensemble.
@@ -35,11 +35,11 @@ External validation on the Stanev dataset follows the same feature pipeline, wit
 ├── data/
 │   ├── train_raw.csv                     # UCI dataset (81 compositional features for 21,263 compounds)
 │   ├── unique_m.csv                      # UCI dataset (compositions of 21,263 compound)
-│   ├── Fermi_169_unique_v5.csv           # Fermi velocity reference dataset (162 materials & critical temperature)
-│   ├── Fermi_169_unique_v6.csv           # Fermi velocity reference dataset (162 materials, vF value, family, subfamily, Tc)
+│   ├── Fermi_230_unique_v5.csv           # Fermi velocity reference dataset (230 materials & critical temperature)
+│   ├── Fermi_230_unique_v6.csv           # Fermi velocity reference dataset (230 materials, vF value, family, subfamily, Tc)
 │   └── stanev_250_compounds.csv          # External validation set (Stanev, disjoint from UCI)
 ├── notebooks/
-│   ├── fermi_velocity_162.ipynb          # Stage 1: pick features from UCI dataset for training vF dataset.
+│   ├── fermi_velocity_230.ipynb          # Stage 1: pick features from UCI dataset for training vF dataset.
 │   ├── vF_xi_Hc2_derivation.ipynb        # Stages 2-4: vF classification and regression pipeline, OOF Tc estimation, GL feature derivation
 │   ├── SHAP_Feature_selection.ipynb      # Stage 5: SHAP ranking and top-30 selection
 │   ├── stacking_ensemble.ipynb           # Stage 6: base learner tuning and stacking ensemble
@@ -81,7 +81,7 @@ pip install -r requirements.txt
 Run the notebooks in order:
 
 ```bash
-jupyter notebook notebooks/fermi_velocity_162.ipynb
+jupyter notebook notebooks/fermi_velocity_230.ipynb
 jupyter notebook notebooks/vF_xi_Hc2_derivation.ipynb
 jupyter notebook notebooks/SHAP_Feature_selection.ipynb
 jupyter notebook notebooks/stacking_ensemble.ipynb
